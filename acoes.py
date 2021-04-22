@@ -2,13 +2,19 @@ from enum import Enum
 from dataclasses import dataclass
 
 class AcoesJogador(Enum):
-    NOME_DE_UMA_ACAO_VALIDA_NO_SEU_JOGO = 'nome_de_uma_acao_valida_no_seu_jogo'
+    MOVER = 'mover'
+    
+class DirecaoMover(Enum):
+    DIREITA = 'Direita'
+    ESQUERDA = 'Esquerda'
+    CIMA = 'Cima'
+    BAIXO = 'Baixo'
 
 @dataclass
 class AcaoJogador():
     tipo: str
-    parametros: tuple = tuple()
-
+    parametros: str
+    
     @classmethod
-    def nome_de_uma_acao_valida_no_seu_jogo(cls, p1,p2,p3,p4):
-        return cls(AcoesJogador.NOME_DE_UMA_ACAO_VALIDA_NO_SEU_JOGO, (p1,p2,p3,p4))
+    def mover(cls, direcao: DirecaoMover) -> 'AcaoJogador':
+        return cls(AcoesJogador.MOVER, direcao)

@@ -7,6 +7,6 @@ class PercepcoesJogador():
     
     Vide documentação sobre dataclasses em python.
     '''
-    pos_bolinhas: Set[Tuple[int,int]]
+    tabuleiro: List[List[int]]
     dimensoes: Tuple[int, int] = (3,3)
     mensagem_jogo: Optional[str] = None
