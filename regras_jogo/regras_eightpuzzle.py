@@ -1,7 +1,7 @@
 from .regras_abstratas import AbstractRegrasJogo
 from .personagens import Personagens
 from percepcoes import PercepcoesJogador
-from acoes import AcoesJogador, DirecaoMover AcoesJogador
+from acoes import AcoesJogador, DirecaoMover
 
 class RegrasEightPuzzle(AbstractRegrasJogo):
     """ Interface mínima para implementar um jogo interativo e modular. Não
@@ -10,17 +10,24 @@ class RegrasEightPuzzle(AbstractRegrasJogo):
     """
 
     def __init__(self):
-    super().__init__()
+        super().__init__()
+        # tabuleiro_completo = [
+        #     [7,2,4],
+        #     [5,0,6],
+        #     [8,3,1],
+        # ]
+
         tabuleiro_completo = [
-            [7,2,4]
-            [5,0,6]
-            [8,3,1]
+            [1,2,3],
+            [4,5,6],
+            [7,0,8],
         ]
 
         self.tabuleiro = tabuleiro_completo
         self.id_personagens = {Personagens.JOGADOR_EIGHT_PUZZLE: 0}
         self.acoes_personagens = {0:None}
-        # self.posicao_vazia = 
+        self.posicao_vazia = self.descobrir_posicao_vazia()
+        self.msg_jogador = None
 
     def registrarPersonagemJogador(self, personagem):
         """ Cria ou recupera id de um personagem.
@@ -67,33 +74,54 @@ class RegrasEightPuzzle(AbstractRegrasJogo):
         """
 
         acao_jogador = self.acoes_personagens[self.id_personagens[Personagens.JOGADOR_EIGHT_PUZZLE]]
+
         if acao_jogador.tipo == AcoesJogador.MOVER:
             direcao = acao_jogador.parametros
+            direcoes_validas = self.get_direcoes_validas()
 
+            if direcao in direcoes_validas:
+                x,y = self.posicao_vazia
+                if direcao == DirecaoMover.ESQUERDA:
+                    self.tabuleiro[x][y], self.tabuleiro[x][y-1] = self.tabuleiro[x][y-1], self.tabuleiro[x][y]
+                elif direcao == DirecaoMover.DIREITA:
+                    self.tabuleiro[x][y], self.tabuleiro[x][y+1] = self.tabuleiro[x][y+1], self.tabuleiro[x][y]
+                elif direcao == DirecaoMover.CIMA:
+                    self.tabuleiro[x][y], self.tabuleiro[x-1][y] = self.tabuleiro[x-1][y], self.tabuleiro[x][y]
+                elif direcao == DirecaoMover.BAIXO:
+                    self.tabuleiro[x][y], self.tabuleiro[x+1][y] = self.tabuleiro[x+1][y], self.tabuleiro[x][y]
+            else:
+                self.msg_jogador = 'Direção é inválida'
+                
+            self.posicao_vazia = self.descobrir_posicao_vazia()
         return
     
     def terminarJogo(self):
         """ Faz procedimentos de fim de jogo, como mostrar placar final,
         gravar resultados, etc...
         """
-        return
+        self.msg_jogador = 'Parabéns, você venceu!'
     
-    def is_direcao_valida(self, direcao: str):
-        x, y = estado.posicao_vazia.x, estado.posicao_vazia.y
+    def get_direcoes_validas(self):
+        direcoes_validas = list()
+        x, y = self.posicao_vazia
 
         if (y-1) <= 2 and (y-1) >= 0:
-            acoes_possiveis.append(Mover('esquerda'))
-
+            direcoes_validas.append(DirecaoMover.ESQUERDA)
         if (y+1) <= 2 and (y+1) >= 0:
-            acoes_possiveis.append(Mover('direita'))
-
+            direcoes_validas.append(DirecaoMover.DIREITA)
         if (x-1) <= 2 and (x-1) >= 0:
-            acoes_possiveis.append(Mover('cima'))
-
+            direcoes_validas.append(DirecaoMover.CIMA)
         if (x+1) <= 2 and (x+1) >= 0:
-            acoes_possiveis.append(Mover('baixo'))
+            direcoes_validas.append(DirecaoMover.BAIXO)
 
-        return acoes_possiveis
+        return direcoes_validas
+
+    def descobrir_posicao_vazia(self):
+        for i in range(3):
+            for j in range(3):
+                if self.tabuleiro[i][j] == 0:
+                    return (i, j)
+
 
 def construir_jogo(*args,**kwargs):
     """ Método factory para uma instância RegrasJogo arbitrária, de acordo com os

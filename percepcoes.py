@@ -1,3 +1,5 @@
+from typing import Tuple, Optional
+
 from dataclasses import dataclass
 
 @dataclass
@@ -7,6 +9,6 @@ class PercepcoesJogador():
     
     Vide documentação sobre dataclasses em python.
     '''
-    tabuleiro: List[List[int]]
+    tabuleiro: list()
     dimensoes: Tuple[int, int] = (3,3)
     mensagem_jogo: Optional[str] = None
