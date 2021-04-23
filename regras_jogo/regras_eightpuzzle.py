@@ -11,17 +11,18 @@ class RegrasEightPuzzle(AbstractRegrasJogo):
 
     def __init__(self):
         super().__init__()
-        # tabuleiro_completo = [
-        #     [7,2,4],
-        #     [5,0,6],
-        #     [8,3,1],
-        # ]
-
         tabuleiro_completo = [
-            [1,2,3],
-            [4,5,6],
-            [7,0,8],
+            [7,2,4],
+            [5,0,6],
+            [8,3,1],
         ]
+
+        # Tabuleiro Teste
+        # tabuleiro_completo = [
+        #     [1,2,3],
+        #     [4,5,6],
+        #     [7,0,8],
+        # ]
 
         self.tabuleiro = tabuleiro_completo
         self.id_personagens = {Personagens.JOGADOR_EIGHT_PUZZLE: 0}
