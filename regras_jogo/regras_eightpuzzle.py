@@ -11,11 +11,12 @@ class RegrasEightPuzzle(AbstractRegrasJogo):
 
     def __init__(self):
         super().__init__()
-        tabuleiro_completo = [
-            [7,2,4],
-            [5,0,6],
-            [8,3,1],
-        ]
+        # Tabuleiro aparentemente impossível
+        # tabuleiro_completo = [
+        #     [7,2,4],
+        #     [5,0,6],
+        #     [8,3,1],
+        # ]
 
         # Tabuleiro Teste
         # tabuleiro_completo = [
@@ -24,9 +25,15 @@ class RegrasEightPuzzle(AbstractRegrasJogo):
         #     [7,0,8],
         # ]
 
+        tabuleiro_completo = [
+            [0,1,2],
+            [5,6,3],
+            [4,7,8],
+        ]
+
         self.tabuleiro = tabuleiro_completo
         self.id_personagens = {Personagens.JOGADOR_EIGHT_PUZZLE: 0}
-        self.acoes_personagens = {0:None}
+        self.acoes_personagens = {0: None}
         self.posicao_vazia = self.descobrir_posicao_vazia()
         self.msg_jogador = None
 
@@ -57,7 +64,9 @@ class RegrasEightPuzzle(AbstractRegrasJogo):
         percepcoes_jogador = PercepcoesJogador(
             tabuleiro = self.tabuleiro,
             dimensoes = (3, 3),
-            mensagem_jogo = self.msg_jogador)
+            mensagem_jogo = self.msg_jogador,
+            posicao_vazia = self.posicao_vazia
+        )
 
         self.msg_jogador = None
         return percepcoes_jogador
@@ -73,7 +82,6 @@ class RegrasEightPuzzle(AbstractRegrasJogo):
         """ Apenas neste momento o jogo é atualizado para seu próximo estado
         de acordo com as ações de cada jogador registradas anteriormente.
         """
-
         acao_jogador = self.acoes_personagens[self.id_personagens[Personagens.JOGADOR_EIGHT_PUZZLE]]
 
         if acao_jogador.tipo == AcoesJogador.MOVER:

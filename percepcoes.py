@@ -12,3 +12,4 @@ class PercepcoesJogador():
     tabuleiro: list()
     dimensoes: Tuple[int, int] = (3,3)
     mensagem_jogo: Optional[str] = None
+    posicao_vazia: Tuple[int, int] = (None, None)
