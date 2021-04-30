@@ -5,38 +5,38 @@ from acoes import AcaoJogador, DirecaoMover
 
 from .abstrato import AgenteAbstrato
 from .problemas.eightpuzzle import ProblemaEightPuzzle
-from .buscadores.busca import busca_arvore_bfs
+from .buscadores.busca import busca_arvore
 
-class AgenteAutomaticoBfs(AgenteAbstrato):
+class AgenteAutomatico(AgenteAbstrato):
 
-    def __init__(self) -> None:
+    def __init__(self, tipo_agente) -> None:
         super().__init__()
 
         self.problema: ProblemaEightPuzzle = None
         self.solucao: list = None
+        self.tipo_agente = tipo_agente
     
     def adquirirPercepcao(self, percepcao_mundo: PercepcoesJogador):
         """ Inspeciona a disposicao dos elementos no objeto de visao e escreve
         na tela para o usuário saber o que seu agente está percebendo.
         """
-        AgenteAutomaticoBfs.desenhar_tabuleiro(percepcao_mundo)
+        AgenteAutomatico.desenhar_tabuleiro(percepcao_mundo)
 
         if not self.solucao:
             self.problema = ProblemaEightPuzzle(percepcao_mundo)
     
     def escolherProximaAcao(self):
         if not self.solucao:
-            no_solucao = busca_arvore_bfs(self.problema)
+            no_solucao = busca_arvore(self.problema, self.tipo_agente)
             self.solucao = no_solucao.caminho_acoes()
-            # print(len(self.solucao), self.solucao)
             if not self.solucao:
-                raise Exception("Agente BFS não encontrou solução.")
+                raise Exception(f'Agente {self.tipo_agente.value} não encontrou solução.')
         
         acao = self.solucao.pop(0)
-        print(f"Próxima ação é {acao}.")
+        print(f'\nPróxima ação é mover para "{acao.direcao}".')
         time.sleep(2)
 
-        direcao = AgenteAutomaticoBfs.traduzir_acao_jogo(acao)
+        direcao = AgenteAutomatico.traduzir_acao_jogo(acao)
         return AcaoJogador.mover(direcao)
 
     @staticmethod
@@ -56,9 +56,9 @@ class AgenteAutomaticoBfs(AgenteAbstrato):
 
     @staticmethod
     def desenhar_tabuleiro(percepcao_mundo: PercepcoesJogador):
-        print("-" * 48)
+        print("-" * 42)
         for x in percepcao_mundo.tabuleiro:
-            print(x)
+            print('{x}\n')
 
         if percepcao_mundo.mensagem_jogo:
             print(f'\nMensagem do jogo: {percepcao_mundo.mensagem_jogo}')

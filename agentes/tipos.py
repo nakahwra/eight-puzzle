@@ -5,5 +5,4 @@ class TiposAgentes(Enum):
     AUTO_BFS = 'Automático BFS'
     AUTO_DFS = 'Automático DFS'
     
-    # adicionar outros tipos de agentes de acordo com
-    # o necessário
+    # adicionar outros tipos de agentes de acordo com o necessário

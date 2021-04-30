@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import time
+
 from regras_jogo.regras_eightpuzzle import construir_jogo
 from regras_jogo.personagens import Personagens
 from agentes import construir_agente
@@ -15,13 +16,37 @@ def ler_tempo(em_turnos=False):
     return 1 if em_turnos else time.time()
 
 
+def escolher_agente():
+    agente_escolhido = None
+
+    while not agente_escolhido:
+        print("-> Escolha o tipo de agente <-")
+        print("1. Humano")
+        print("2. Agente BFS")
+        print("3. Agente DFS")
+        tipo_agente = str(input('Insira um número: '))
+
+        agentes = {
+            '1': TiposAgentes.PREPOSTO_HUMANO,
+            '2': TiposAgentes.AUTO_BFS,
+            '3': TiposAgentes.AUTO_DFS,
+        }
+
+        agente_escolhido = agentes.get(tipo_agente)
+
+        if not agente_escolhido:
+            print('*** Agente inválido ***\n')
+
+    return agente_escolhido
+
+
 def iniciar_jogo():
     
     # Inicializar e configurar jogo
     jogo = construir_jogo()
     personagem_jogador = jogo.registrarPersonagemJogador(Personagens.JOGADOR_EIGHT_PUZZLE)
-    # agente_jogador = construir_agente(TiposAgentes.PREPOSTO_HUMANO, Personagens.JOGADOR_EIGHT_PUZZLE)
-    agente_jogador = construir_agente(TiposAgentes.AUTO_BFS, Personagens.JOGADOR_EIGHT_PUZZLE)
+    agente_escolhido = escolher_agente()
+    agente_jogador = construir_agente(agente_escolhido, Personagens.JOGADOR_EIGHT_PUZZLE)
     
     tempo_de_jogo = 0
     while not jogo.isFim():
@@ -35,9 +60,8 @@ def iniciar_jogo():
         jogo.registrarProximaAcao(personagem_jogador, acao)
 
         # Atualizar jogo
-        # tempo_corrente = ler_tempo()
-        jogo.atualizarEstado(1) #tempo_corrente - tempo_de_jogo
-        tempo_de_jogo += 1 #tempo_corrente
+        jogo.atualizarEstado(1)
+        tempo_de_jogo += 1
 
     jogo.terminarJogo()
     ambiente_perceptivel = jogo.gerarCampoVisao(personagem_jogador)

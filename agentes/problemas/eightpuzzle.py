@@ -9,14 +9,17 @@ class PosicaoVazia():
     x: int
     y: int
 
+
 @dataclass
 class EstadoEightPuzzle():
     tabuleiro: []
     posicao_vazia: PosicaoVazia
 
+
 @dataclass
 class Mover():
     direcao: str
+
 
 class ProblemaEightPuzzle():
 

@@ -11,25 +11,26 @@ class RegrasEightPuzzle(AbstractRegrasJogo):
 
     def __init__(self):
         super().__init__()
-        # Tabuleiro aparentemente impossível
-        # tabuleiro_completo = [
-        #     [7,2,4],
-        #     [5,0,6],
-        #     [8,3,1],
-        # ]
-
-        # Tabuleiro Teste
+        # Tabuleiro Padrão - resolvível por apenas BFS em tempo razoável
+        tabuleiro_completo = [
+            [0,1,2],
+            [5,6,3],
+            [4,7,8],
+        ]
+        
+        # Tabuleiro Teste 1 - resolvível para BFS e DFS em tempo razoável
         # tabuleiro_completo = [
         #     [1,2,3],
         #     [4,5,6],
         #     [7,0,8],
         # ]
 
-        tabuleiro_completo = [
-            [0,1,2],
-            [5,6,3],
-            [4,7,8],
-        ]
+        # Tabuleiro Teste 2 - aparentemente não-resolvível por agentes auto. em tempo razoável
+        # tabuleiro_completo = [
+        #     [7,2,4],
+        #     [5,0,6],
+        #     [8,3,1],
+        # ]
 
         self.tabuleiro = tabuleiro_completo
         self.id_personagens = {Personagens.JOGADOR_EIGHT_PUZZLE: 0}

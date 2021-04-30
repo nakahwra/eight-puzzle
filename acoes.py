@@ -1,14 +1,17 @@
 from enum import Enum
 from dataclasses import dataclass
 
+
 class AcoesJogador(Enum):
     MOVER = 'Mover'
     
+
 class DirecaoMover(Enum):
     DIREITA = 'Direita'
     ESQUERDA = 'Esquerda'
     CIMA = 'Cima'
     BAIXO = 'Baixo'
+
 
 @dataclass
 class AcaoJogador():

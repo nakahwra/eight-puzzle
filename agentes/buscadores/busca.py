@@ -1,8 +1,9 @@
+import time
+
 from typing import Any, Optional
 from dataclasses import dataclass
 
-import time
-
+from agentes.tipos import TiposAgentes
 
 class ProblemaSemSolucaoException(Exception):
     pass
@@ -36,25 +37,25 @@ class No():
         return f'No({self.estado!r},{self.acao!r})'
 
 
-def busca_arvore_bfs(problema) -> No:
+def busca_arvore(problema, tipo_agente) -> No:
     """ Retorna uma solucao ou falha"""
     borda = [No(problema.estado_inicial())]
     visited = list()
     while borda:
-        folha = borda.pop(0)
-        print(f'Jogadas processadas: {len(visited)}')
+        if tipo_agente == TiposAgentes.AUTO_BFS:
+            folha = borda.pop(0)
+        else:
+            folha = borda.pop()
+
         if folha.estado.tabuleiro not in visited: 
             visited.append(folha.estado.tabuleiro)
-            # print(f"Altura {folha.calcular_profundidade()}, com {len(borda)} nós na borda.")
             if problema.teste_objetivo(folha.estado.tabuleiro):
                 return folha
 
-            # print(f'Não era objetivo. Ações adjacentes são {problema.acoes(folha.estado)}.')
             for acao in problema.acoes(folha.estado):
                 expandido = No.criar_no_filho(problema, folha, acao)
                 borda.append(expandido)
-
-                # print(f'Enfileirado {expandido}')
-                # time.sleep(5)
+                
+            print(f'Jogadas processadas: {len(visited)}')
 
     raise ProblemaSemSolucaoException()
