@@ -34,7 +34,7 @@ class AgenteAutomatico(AgenteAbstrato):
         
         acao = self.solucao.pop(0)
         print(f'\nPróxima ação é mover para "{acao.direcao}".')
-        time.sleep(2)
+        time.sleep(1)
 
         direcao = AgenteAutomatico.traduzir_acao_jogo(acao)
         return AcaoJogador.mover(direcao)
@@ -58,7 +58,7 @@ class AgenteAutomatico(AgenteAbstrato):
     def desenhar_tabuleiro(percepcao_mundo: PercepcoesJogador):
         print("-" * 42)
         for x in percepcao_mundo.tabuleiro:
-            print('{x}\n')
+            print(x)
 
         if percepcao_mundo.mensagem_jogo:
             print(f'\nMensagem do jogo: {percepcao_mundo.mensagem_jogo}')
