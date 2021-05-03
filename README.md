@@ -15,18 +15,18 @@ Jogo do quebra-cabeças de 8 peças em linha de comando desenvolvido para a disc
     python3 ./jogo.py
     ```
     
-### Agentes automáticos
+## Agentes automáticos
 São implementados dois agentes automáticos que utilizam dois algoritmos de buscas de "força bruta":
 
-#### Breadth-first Search Algorithm - BFS
+### Breadth-first Search Algorithm - BFS
 Busca em largura, algoritmo de busca em grafos/árvores onde prioriza-se a exploração de todos os vértices vizinhos antes da travessia para a próxima profundidade, até que se encontre um nó solução.  
 ![bfs](https://upload.wikimedia.org/wikipedia/commons/5/5d/Breadth-First-Search-Algorithm.gif)
 
-#### Depth-first Search Algorithm - DFS
+### Depth-first Search Algorithm - DFS
 Busca em profundidade, algoritmo de busca em grafos/árvores onde prioriza-se a exploração de um dos ramos do nó raíz em sua totalidade até que se encontre um nó solução.  
 ![dfs](https://upload.wikimedia.org/wikipedia/commons/7/7f/Depth-First-Search.gif)
 
-### Configurações opcionais
+## Configurações opcionais
 #### Tabuleiro
 O tabuleiro pode ser ajustado no construtor da classe de regras do jogo em: ```regras_jogo/regras_eightpuzzle.py```. Lá estão disponíveis outros dois tabuleiros usados para testes, e também pode-se configurar novos tabuleiros.
 #### Intervalo entre jogadas
