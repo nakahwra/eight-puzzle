@@ -1,6 +1,6 @@
 import copy
 
-from typing import Sequence, Set
+from typing import Sequence, Set, List
 from dataclasses import dataclass
 
 
@@ -12,7 +12,7 @@ class PosicaoVazia():
 
 @dataclass
 class EstadoEightPuzzle():
-    tabuleiro: []
+    tabuleiro: List
     posicao_vazia: PosicaoVazia
 
 
