@@ -1,5 +1,7 @@
 from .humano import AgentePrepostoESHumano
 from .agente_automatico import AgenteAutomatico
+from .agente_guloso import AgenteGuloso
+from .agente_astar import AgenteAStar
 from .tipos import TiposAgentes
 
 def construir_agente(*args, **kwargs):
@@ -9,6 +11,10 @@ def construir_agente(*args, **kwargs):
     tipo_agente = args[0]
     if tipo_agente == TiposAgentes.PREPOSTO_HUMANO:
         return AgentePrepostoESHumano()
+    elif tipo_agente == TiposAgentes.H_GREEDY:
+        return AgenteGuloso()
+    elif tipo_agente == TiposAgentes.H_ASTAR:
+        return AgenteAStar()
     else:
         return AgenteAutomatico(tipo_agente)
     

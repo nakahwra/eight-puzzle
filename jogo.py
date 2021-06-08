@@ -24,12 +24,16 @@ def escolher_agente():
         print("1. Humano")
         print("2. Agente BFS")
         print("3. Agente DFS")
+        print("4. Agente Guloso")
+        print("5. Agente A*")
         tipo_agente = str(input('Insira um número: '))
 
         agentes = {
             '1': TiposAgentes.PREPOSTO_HUMANO,
             '2': TiposAgentes.AUTO_BFS,
             '3': TiposAgentes.AUTO_DFS,
+            '4': TiposAgentes.H_GREEDY,
+            '5': TiposAgentes.H_ASTAR,
         }
 
         agente_escolhido = agentes.get(tipo_agente)
