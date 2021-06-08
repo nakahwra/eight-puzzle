@@ -7,7 +7,7 @@ from .abstrato import AgenteAbstrato
 from .problemas.eightpuzzle import ProblemaEightPuzzle
 from .buscadores.busca import busca_arvore
 
-class AgenteAStar(AgenteAbstrato):
+class AgenteHeuristico(AgenteAbstrato):
 
     def __init__(self, tipo_agente) -> None:
         super().__init__()
@@ -20,7 +20,7 @@ class AgenteAStar(AgenteAbstrato):
         """ Inspeciona a disposicao dos elementos no objeto de visao e escreve
         na tela para o usuário saber o que seu agente está percebendo.
         """
-        AgenteAStar.desenhar_tabuleiro(percepcao_mundo)
+        AgenteHeuristico.desenhar_tabuleiro(percepcao_mundo)
 
         if not self.solucao:
             self.problema = ProblemaEightPuzzle(percepcao_mundo)
@@ -36,7 +36,7 @@ class AgenteAStar(AgenteAbstrato):
         print(f'\nPróxima ação é mover para "{acao.direcao}".')
         time.sleep(1)
 
-        direcao = AgenteAStar.traduzir_acao_jogo(acao)
+        direcao = AgenteHeuristico.traduzir_acao_jogo(acao)
         return AcaoJogador.mover(direcao)
 
     @staticmethod
