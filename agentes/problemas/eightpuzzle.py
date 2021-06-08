@@ -79,12 +79,8 @@ class ProblemaEightPuzzle():
 
     @staticmethod
     def teste_objetivo(tabuleiro) -> bool:
-        parse_tabuleiro = list()
-        for linha in tabuleiro:
-            for coluna in linha:
-                parse_tabuleiro.append(coluna)
-
-        solucao = [1,2,3,4,5,6,7,8,0]
+        parse_tabuleiro = ProblemaEightPuzzle.parse_tabuleiro(tabuleiro)
+        solucao = ProblemaEightPuzzle.get_solucao()
         return parse_tabuleiro == solucao
     
     @staticmethod
@@ -99,3 +95,30 @@ class ProblemaEightPuzzle():
             for coluna in range(len(tabuleiro[linha])):
                 if tabuleiro[linha][coluna] == 0:
                     return linha, coluna
+    
+    @staticmethod
+    def funcao_avalicao(tabuleiro, custo_acumulado):
+        parse_tabuleiro = ProblemaEightPuzzle.parse_tabuleiro(tabuleiro)
+        solucao = ProblemaEightPuzzle.get_solucao()
+        return ProblemaEightPuzzle.funcao_heuristica(parse_tabuleiro, solucao) + custo_acumulado
+            
+    @staticmethod
+    def funcao_heuristica(tabuleiro, solucao):
+        incorretos = 0
+        for i in tabuleiro:
+            if tabuleiro[i] != solucao[i]:
+                incorretos += 1
+        return incorretos
+    
+    @staticmethod
+    def get_solucao():
+        return [1,2,3,4,5,6,7,8,0]
+
+    @staticmethod
+    def parse_tabuleiro(tabuleiro):
+        parse_tabuleiro = list()
+        for linha in tabuleiro:
+            for coluna in linha:
+                parse_tabuleiro.append(coluna)
+        
+        return parse_tabuleiro
