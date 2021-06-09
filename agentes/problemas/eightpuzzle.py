@@ -98,7 +98,7 @@ class ProblemaEightPuzzle():
     
     @staticmethod
     def funcao_avaliacao(tabuleiro, custo_acumulado):
-        return ProblemaEightPuzzle.funcao_heuristica(tabuleiro) + custo_acumulado
+        return ProblemaEightPuzzle.funcao_heuristica2(tabuleiro) + custo_acumulado
 
     @staticmethod
     def funcao_heuristica(tabuleiro):
@@ -109,7 +109,22 @@ class ProblemaEightPuzzle():
             if tabuleiro[i] != solucao[i]:
                 incorretos += 1
         return incorretos
-    
+
+    @staticmethod
+    def funcao_heuristica2(tabuleiro):
+        tamanho_tabuleiro = len(tabuleiro)
+        resultado, contador = 0, 1
+        for i in range(0, tamanho_tabuleiro):
+            for j in range(0, tamanho_tabuleiro):
+                index = tabuleiro[i][j] - 1
+                if index == -1:
+                    distance = (2 - i) + (2 - j)
+                else:
+                    distance = abs(i - (index / tamanho_tabuleiro)) + abs(j - (index % tamanho_tabuleiro))
+                resultado += distance
+                contador += 1
+        return resultado
+
     @staticmethod
     def get_solucao():
         return [1,2,3,4,5,6,7,8,0]
