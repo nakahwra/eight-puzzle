@@ -97,14 +97,14 @@ class ProblemaEightPuzzle():
                     return linha, coluna
     
     @staticmethod
-    def funcao_avalicao(tabuleiro, custo_acumulado):
-        parse_tabuleiro = ProblemaEightPuzzle.parse_tabuleiro(tabuleiro)
-        solucao = ProblemaEightPuzzle.get_solucao()
-        return ProblemaEightPuzzle.funcao_heuristica(parse_tabuleiro, solucao) + custo_acumulado
-            
+    def funcao_avaliacao(tabuleiro, custo_acumulado):
+        return ProblemaEightPuzzle.funcao_heuristica(tabuleiro) + custo_acumulado
+
     @staticmethod
-    def funcao_heuristica(tabuleiro, solucao):
+    def funcao_heuristica(tabuleiro):
         incorretos = 0
+        tabuleiro = ProblemaEightPuzzle.parse_tabuleiro(tabuleiro)
+        solucao = ProblemaEightPuzzle.get_solucao()
         for i in tabuleiro:
             if tabuleiro[i] != solucao[i]:
                 incorretos += 1

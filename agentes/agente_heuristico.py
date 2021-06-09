@@ -5,7 +5,7 @@ from acoes import AcaoJogador, DirecaoMover
 
 from .abstrato import AgenteAbstrato
 from .problemas.eightpuzzle import ProblemaEightPuzzle
-from .buscadores.busca import busca_arvore
+from .buscadores.busca import busca_heuristica
 
 class AgenteHeuristico(AgenteAbstrato):
 
@@ -27,7 +27,7 @@ class AgenteHeuristico(AgenteAbstrato):
     
     def escolherProximaAcao(self):
         if not self.solucao:
-            no_solucao = busca_arvore(self.problema, self.tipo_agente)
+            no_solucao = busca_heuristica(self.problema, self.tipo_agente)
             self.solucao = no_solucao.caminho_acoes()
             if not self.solucao:
                 raise Exception(f'Agente {self.tipo_agente.value} não encontrou solução.')
