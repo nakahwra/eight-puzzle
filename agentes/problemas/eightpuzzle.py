@@ -118,10 +118,10 @@ class ProblemaEightPuzzle():
             for j in range(0, tamanho_tabuleiro):
                 index = tabuleiro[i][j] - 1
                 if index == -1:
-                    distance = (2 - i) + (2 - j)
+                    distancia = (2 - i) + (2 - j)
                 else:
-                    distance = abs(i - (index / tamanho_tabuleiro)) + abs(j - (index % tamanho_tabuleiro))
-                resultado += distance
+                    distancia = abs(i - (index / tamanho_tabuleiro)) + abs(j - (index % tamanho_tabuleiro))
+                resultado += distancia
                 contador += 1
         return resultado
 
